@@ -122,6 +122,8 @@ void insert_list(Node* List, int pos, int val)
  
     p_new->element = val; 
     p_new->Next = P2;
+    p_new->Prev = P1;
+    P2->Prev = p_new;
     P1->Next = p_new;
 }
 
@@ -145,6 +147,7 @@ void delete_list(Node* List, int pos)
     }
 
     P1->Next = P2->Next;
+    P2->Next->Prev = P1;
     free(P2);
     P2 = NULL;
 }
@@ -170,12 +173,12 @@ int main()
     Node* List = CreateList();     
     traverse_list(List);      
     find_list(List);
-    //insert_list(List, 3, 100);
-    //traverse_list(List);  
-    //delete_list(List, 3);
-    //traverse_list(List);  
-    //delete_the_list(List); 
-    //traverse_list(List);  
+    insert_list(List, 3, 100);
+    traverse_list(List);  
+    delete_list(List, 3);
+    traverse_list(List);  
+    delete_the_list(List); 
+    traverse_list(List);  
     return 0;
 }
 
